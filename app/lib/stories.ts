@@ -73,7 +73,7 @@ export function getStoryBySlug(slug: string): Story | null {
       availableImages = fs
         .readdirSync(imagesPath)
         .filter((file) => /\.(png|jpg|jpeg|gif|webp)$/i.test(file))
-        .sort()
+        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
         .map((file) => `images/${file}`);
     }
 

@@ -139,7 +139,3 @@ Bubba smiled and kissed the top of his head.
 "I love you too, my Liam," she said.
 
 And Liam felt brave and warm and completely, perfectly safe.
-
----
-
-**The End**
