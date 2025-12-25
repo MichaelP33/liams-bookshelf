@@ -39,9 +39,9 @@ const config: Config = {
         "story-base": ["1.125rem", { lineHeight: "1.75", letterSpacing: "0.01em" }],
       },
       boxShadow: {
-        "book": "0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)",
-        "book-hover": "0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06)",
-        "page": "inset 0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.04)",
+        "book": "0 2px 8px rgba(139, 119, 90, 0.12), 0 1px 3px rgba(139, 119, 90, 0.08)",
+        "book-hover": "0 4px 16px rgba(139, 119, 90, 0.16), 0 2px 6px rgba(139, 119, 90, 0.1)",
+        "page": "inset 0 0 0 1px rgba(139, 119, 90, 0.08), 0 2px 8px rgba(139, 119, 90, 0.06)",
       },
     },
   },

@@ -28,12 +28,27 @@
   }
 
   body {
-    @apply bg-cream text-text-primary font-serif;
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.02) 1px, transparent 0);
-    background-size: 20px 20px;
+    @apply text-text-primary font-serif;
+    background: linear-gradient(to bottom, #FDF8F3, #F9F3EC);
+    background-attachment: fixed;
+    /* Subtle paper texture overlay */
+    position: relative;
     /* Prevent pull-to-refresh on mobile */
     overscroll-behavior-y: contain;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(139, 119, 90, 0.03) 1px, transparent 0);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: -1;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -56,15 +71,15 @@
 
   .book-shadow {
     box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.08),
-      0 2px 4px rgba(0, 0, 0, 0.04),
+      0 2px 8px rgba(139, 119, 90, 0.12),
+      0 1px 3px rgba(139, 119, 90, 0.08),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   .book-shadow-hover {
     box-shadow: 
-      0 8px 24px rgba(0, 0, 0, 0.12),
-      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 4px 16px rgba(139, 119, 90, 0.16),
+      0 2px 6px rgba(139, 119, 90, 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
@@ -80,6 +95,50 @@
     to {
       transform: rotate(360deg);
     }
+  }
+
+  /* Heart pulse animation */
+  .heart-pulse {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+  }
+
+  /* Decorative divider */
+  .decorative-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .decorative-divider::before,
+  .decorative-divider::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: linear-gradient(to var(--direction, right), transparent, var(--color-sepia-light), transparent);
+  }
+
+  .decorative-divider::before {
+    --direction: right;
+  }
+
+  .decorative-divider::after {
+    --direction: left;
+  }
+
+  .decorative-divider .ornament {
+    color: var(--color-sepia);
+    font-size: 1rem;
   }
 }
 
