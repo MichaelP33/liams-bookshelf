@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { StoryPage } from '@/app/lib/types';
+import FontSizeSettings, { FontSize } from './FontSizeSettings';
+
+const FONT_SIZE_STORAGE_KEY = 'liams-books-font-size';
 
 interface StoryReaderProps {
   pages: StoryPage[];
@@ -13,12 +16,33 @@ interface StoryReaderProps {
   title: string;
 }
 
+const fontSizeClasses: Record<FontSize, string> = {
+  small: 'text-sm sm:text-base md:text-story-sm',
+  medium: 'text-base sm:text-story-base md:text-story-lg',
+  large: 'text-lg sm:text-story-lg md:text-xl',
+};
+
 export default function StoryReader({ pages, slug, title }: StoryReaderProps) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
+  const [fontSize, setFontSize] = useState<FontSize>('medium');
   const totalPages = pages.length;
+
+  // Load font size preference from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem(FONT_SIZE_STORAGE_KEY);
+    if (saved && ['small', 'medium', 'large'].includes(saved)) {
+      setFontSize(saved as FontSize);
+    }
+  }, []);
+
+  // Save font size preference to localStorage
+  const handleFontSizeChange = useCallback((size: FontSize) => {
+    setFontSize(size);
+    localStorage.setItem(FONT_SIZE_STORAGE_KEY, size);
+  }, []);
 
   const goToPage = useCallback((pageIndex: number) => {
     if (pageIndex >= 0 && pageIndex < totalPages) {
@@ -107,6 +131,11 @@ export default function StoryReader({ pages, slug, title }: StoryReaderProps) {
 
   return (
     <div className="relative">
+      {/* Settings */}
+      <div className="flex justify-end mb-2">
+        <FontSizeSettings fontSize={fontSize} onFontSizeChange={handleFontSizeChange} />
+      </div>
+
       {/* Page Content */}
       <div className="relative overflow-hidden min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh]">
         <AnimatePresence mode="wait" custom={direction}>
@@ -158,7 +187,7 @@ export default function StoryReader({ pages, slug, title }: StoryReaderProps) {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <div className="text-base sm:text-story-base md:text-story-lg text-text-primary text-center leading-relaxed sm:leading-loose">
+                  <div className={`${fontSizeClasses[fontSize]} text-text-primary text-center leading-relaxed sm:leading-loose transition-all duration-200`}>
                     <ReactMarkdown
                       components={{
                         p: ({ children }) => (

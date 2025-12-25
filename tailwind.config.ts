@@ -35,8 +35,9 @@ const config: Config = {
         display: ["Playfair Display", "Georgia", "serif"],
       },
       fontSize: {
-        "story-lg": ["1.25rem", { lineHeight: "1.8", letterSpacing: "0.01em" }],
+        "story-sm": ["1rem", { lineHeight: "1.7", letterSpacing: "0.01em" }],
         "story-base": ["1.125rem", { lineHeight: "1.75", letterSpacing: "0.01em" }],
+        "story-lg": ["1.25rem", { lineHeight: "1.8", letterSpacing: "0.01em" }],
       },
       boxShadow: {
         "book": "0 2px 8px rgba(139, 119, 90, 0.12), 0 1px 3px rgba(139, 119, 90, 0.08)",
