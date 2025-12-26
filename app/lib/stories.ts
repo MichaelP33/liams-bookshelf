@@ -6,7 +6,20 @@ import { Story, StoryPage, StoryMetadata } from './types';
 const storiesDirectory = path.join(process.cwd(), 'Stories');
 
 /**
+ * Get the bookshelf filter from environment variable
+ * Read inside function to ensure it's evaluated at build/runtime
+ */
+function getBookshelfFilter(): string | undefined {
+  const filter = process.env.BOOKSHELF?.toLowerCase();
+  // This will show in Vercel build logs for debugging
+  console.log('[Bookshelf] BOOKSHELF env var:', process.env.BOOKSHELF);
+  console.log('[Bookshelf] Filter value:', filter);
+  return filter;
+}
+
+/**
  * Get all story slugs from the Stories directory
+ * Filters by BOOKSHELF env variable if set
  */
 export function getStorySlugs(): string[] {
   if (!fs.existsSync(storiesDirectory)) {
@@ -14,9 +27,23 @@ export function getStorySlugs(): string[] {
   }
 
   const entries = fs.readdirSync(storiesDirectory, { withFileTypes: true });
-  return entries
+  let slugs = entries
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name);
+
+  // Filter stories based on BOOKSHELF environment variable
+  const bookshelfFilter = getBookshelfFilter();
+  
+  console.log('[Bookshelf] All slugs before filter:', slugs);
+  
+  if (bookshelfFilter) {
+    slugs = slugs.filter((slug) =>
+      slug.toLowerCase().includes(bookshelfFilter)
+    );
+    console.log('[Bookshelf] Filtered slugs:', slugs);
+  }
+
+  return slugs;
 }
 
 /**

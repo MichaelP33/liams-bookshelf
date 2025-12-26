@@ -2,6 +2,9 @@
 
 import { motion } from 'framer-motion';
 
+// Configurable bookshelf name via environment variable
+const bookshelfName = process.env.NEXT_PUBLIC_BOOKSHELF_NAME || "Liam's Bookshelf";
+
 export default function BookshelfHeader() {
   return (
     <header className="text-center mb-8 sm:mb-10 md:mb-12 relative">
@@ -83,7 +86,7 @@ export default function BookshelfHeader() {
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display text-text-primary mb-3 sm:mb-4 relative px-2">
           <span className="relative">
-            Liam&apos;s Bookshelf
+            {bookshelfName}
             {/* Underline decoration */}
             <motion.div
               className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-0.5 sm:h-1 bg-gradient-to-r from-transparent via-sepia to-transparent rounded-full"
