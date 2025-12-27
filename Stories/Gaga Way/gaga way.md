@@ -1,9 +1,5 @@
 # The Gaga Way
 
-**A story about Liam and his wonderful Gaga**
-
----
-
 ## Gaga Arrives!
 
 Ding-dong! The doorbell rang and Liam jumped up from his toys.
